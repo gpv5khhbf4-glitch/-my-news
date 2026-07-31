@@ -6,117 +6,176 @@
     <title>أخباري الخاصة</title>
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-main: #f5f5f5;
-            --text-muted: #a0a0a0;
+            --bg-color: #0d0d0d;
+            --card-bg: #1a1a1a;
+            --text-main: #ffffff;
+            --text-muted: #888888;
             --gold-accent: #d4af37;
+            --gold-dim: rgba(212, 175, 55, 0.15);
         }
+        
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
+            padding-top: 20px;
         }
+
         .container {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
         }
-        header {
-            text-align: center;
+
+        /* القائمة العائمة الجديدة (الزجاج المضبب) */
+        .tabs-container {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 8px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 15px;
+            z-index: 100;
             margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        h1 { color: var(--gold-accent); margin-bottom: 20px;}
+
+        .tab-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* تأثير الضغطة */
+        .tab-btn:active {
+            transform: scale(0.90);
+        }
+
+        .tab-btn.active {
+            background-color: var(--gold-accent);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* صندوق البحث بتصميم جديد */
         .search-box {
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 16px 20px;
+            border-radius: 15px;
             border: 1px solid #333;
             background-color: var(--card-bg);
             color: var(--text-main);
-            font-size: 16px;
+            font-size: 18px;
             box-sizing: border-box;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
         }
+        
         .search-box:focus {
             outline: none;
             border-color: var(--gold-accent);
+            box-shadow: 0 0 15px var(--gold-dim);
+            transform: translateY(-2px);
         }
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            justify-content: center;
-        }
-        .tab-btn {
-            background-color: var(--card-bg);
-            color: var(--text-main);
-            border: 1px solid #333;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        .tab-btn.active {
-            background-color: var(--gold-accent);
-            color: var(--bg-color);
-            font-weight: bold;
-            border-color: var(--gold-accent);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-        }
+
+        /* تصميم بطاقة الخبر */
         .news-container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
+
         .news-card {
             background-color: var(--card-bg);
             padding: 20px;
-            border-radius: 10px;
-            border-right: 4px solid transparent;
-            transition: 0.3s;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            opacity: 0; /* مخفي عشان حركة الدخول */
+            transform: translateY(20px);
+            animation: slideUp 0.5s forwards ease-out;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .news-card:hover {
-            border-right-color: var(--gold-accent);
-            transform: translateX(-5px);
+
+        .news-card:active {
+            transform: scale(0.98);
         }
+
+        /* حركة الدخول للأخبار */
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* تاق وقت النشر (منفصل فوق) */
+        .publish-time {
+            display: inline-block;
+            background: #2a2a2a;
+            color: var(--text-muted);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        /* عنوان الخبر مكبر */
         .news-title {
-            margin: 0 0 10px 0;
-            font-size: 18px;
+            margin: 0 0 15px 0;
+            font-size: 22px;
+            line-height: 1.5;
         }
+
         .news-title a {
             color: var(--text-main);
             text-decoration: none;
+            transition: color 0.2s;
         }
+
         .news-title a:hover {
             color: var(--gold-accent);
         }
-        .news-meta {
-            font-size: 13px;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
+
+        /* تاق وقت القراءة (منفصل تحت) */
+        .read-time {
+            display: inline-flex;
+            align-items: center;
+            background: var(--gold-dim);
+            color: var(--gold-accent);
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
         }
+
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
-        <h1>أخباري | News</h1>
-        <input type="text" id="searchInput" class="search-box" placeholder="ابحث في الأخبار (مثال: الذكاء الاصطناعي)..." onkeyup="filterNews()">
-        
-        <div class="tabs">
-            <button class="tab-btn active" onclick="changeTab('politics', this)">🌍 السياسة</button>
-            <button class="tab-btn" onclick="changeTab('tech', this)">💻 التكنولوجيا</button>
-            <button class="tab-btn" onclick="changeTab('ai', this)">🤖 الذكاء الاصطناعي</button>
-        </div>
-    </header>
+    <!-- صندوق البحث -->
+    <input type="text" id="searchInput" class="search-box" placeholder="🔍 ابحث في الأخبار..." onkeyup="filterNews()">
+    
+    <!-- القائمة العائمة الجديدة -->
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="changeTab('politics', this)">السياسة</button>
+        <button class="tab-btn" onclick="changeTab('tech', this)">التقنية</button>
+        <button class="tab-btn" onclick="changeTab('mobiles', this)">الجوالات</button>
+    </div>
 
+    <!-- حاوية الأخبار -->
     <div class="news-container" id="newsContainer">
-        <p style="text-align:center; color: var(--text-muted);">جاري تحميل الأخبار...</p>
+        <p style="text-align:center; color: var(--text-muted); font-size: 18px;">جاري تجهيز الأخبار...</p>
     </div>
 </div>
 
@@ -131,15 +190,22 @@
             renderNews();
         })
         .catch(error => {
-            document.getElementById('newsContainer').innerHTML = '<p style="text-align:center; color: var(--text-muted);">جاري انتظار التحديث الأول للأخبار بنص الليل...</p>';
+            document.getElementById('newsContainer').innerHTML = '<p style="text-align:center; color: var(--text-muted);">جاري تحديث الأخبار... حاول بعد ثواني</p>';
         });
 
     function changeTab(category, btnElement) {
         currentCategory = category;
+        
+        // تغيير الزر النشط
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
+        
+        // تصفير البحث
         document.getElementById('searchInput').value = '';
         renderNews();
+        
+        // ترجيع الشاشة فوق بلمسة ناعمة إذا كان المستخدم نازل تحت
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function filterNews() {
@@ -159,19 +225,21 @@
         }
 
         if (articles.length === 0) {
-            container.innerHTML = '<p style="text-align:center; color: var(--text-muted);">لا توجد أخبار حالياً أو لم يتم العثور على نتائج.</p>';
+            container.innerHTML = '<p style="text-align:center; color: var(--text-muted); font-size: 18px; margin-top: 50px;">لا توجد أخبار حالياً 🤷‍♂️</p>';
             return;
         }
 
-        articles.forEach(article => {
+        articles.forEach((article, index) => {
             const card = document.createElement('div');
             card.className = 'news-card';
+            
+            // إضافة تأخير زمني لكل بطاقة عشان تطلع بحركة متدرجة فخمة
+            card.style.animationDelay = `${index * 0.1}s`;
+            
             card.innerHTML = `
+                <div class="publish-time">🕒 نُشر: ${article.time}</div>
                 <h3 class="news-title"><a href="${article.link}" target="_blank">${article.title}</a></h3>
-                <div class="news-meta">
-                    <span>🕒 ${article.time}</span>
-                    <span>⏳ وقت القراءة: ~${article.read_time} دقائق</span>
-                </div>
+                <div class="read-time">⏳ يستغرق ${article.read_time} دقائق للقراءة</div>
             `;
             container.appendChild(card);
         });
