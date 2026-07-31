@@ -2,9 +2,12 @@ name: Update News Daily
 
 on:
   schedule:
-    # التوقيت بصيغة UTC. الساعة 20:00 UTC توافق الساعة 12:00 منتصف الليل بتوقيت الإمارات
     - cron: '0 20 * * *'
-  workflow_dispatch: # يخليك تقدر تحدث الأخبار يدوياً بأي وقت
+  workflow_dispatch:
+
+# هذا الجزء الجديد اللي بيعطي المحرك صلاحية حفظ وتحديث ملف الأخبار
+permissions:
+  contents: write
 
 jobs:
   update-news:
