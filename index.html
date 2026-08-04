@@ -139,7 +139,7 @@
             color: var(--gold-accent);
         }
 
-        .read-time {
+        .read-badge {
             display: inline-flex;
             align-items: center;
             background: var(--gold-dim);
@@ -219,7 +219,7 @@
             card.innerHTML = `
                 <div class="publish-time">🕒 نُشر: ${article.time}</div>
                 <h3 class="news-title"><a href="${article.link}" target="_blank">${article.title}</a></h3>
-                <div class="read-time">⏳ يستغرق ${article.read_time} دقائق للقراءة</div>
+                <div class="read-badge">${article.read_label || '⚡ قراءة سريعة'}</div>
             `;
             container.appendChild(card);
         });
