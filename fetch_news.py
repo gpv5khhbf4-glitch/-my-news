@@ -2,7 +2,7 @@ import feedparser
 import json
 import re
 
-# مصادر الأخبار المحدثة (السياسة، التقنية، وأخبار الأدوية والعلاجات)
+# مصادر أخبار مضمونة ومفتوحة للطب والأدوية
 FEEDS = {
     "politics": [
         "https://www.skynewsarabia.com/web/rss.xml", 
@@ -13,9 +13,8 @@ FEEDS = {
         "https://www.tech-wd.com/wd/feed/"
     ],
     "medicines": [
-        "https://www.webteb.com/rss/news",                       # أخبار طبية ودوائية من ويب طب
-        "https://www.seha.ae/feed/",                            # أخبار العلاجات والرعاية الصحية
-        "https://arabic.rt.com/rss/medicine/"                   # أحدث أبحاث الأدوية والاكتشافات الطبية
+        "https://www.aljazeera.net/aljazeerarss/a7c18663-b1f1-4a18-9366-282672323f4f/3a105021-a3f2-4c9d-8d5a-ed756d10c0e3", # الجزيرة صحة وطب
+        "https://www.skynewsarabia.com/rss/v1/technology.xml" # علوم وصحة وسكاي نيوز
     ]
 }
 
@@ -31,7 +30,7 @@ for category, urls in FEEDS.items():
     for url in urls:
         try:
             feed = feedparser.parse(url)
-            for entry in feed.entries[:10]:
+            for entry in feed.entries[:12]:
                 summary = entry.get('summary', '')
                 title = entry.title.strip()
                 
@@ -43,9 +42,9 @@ for category, urls in FEEDS.items():
                     "read_time": calculate_read_time(summary + " " + title)
                 })
         except Exception as e:
-            print(f"فشل السحب من المصدر {url}: {e}")
+            print(f"خطأ في السحب: {e}")
 
 with open('news.json', 'w', encoding='utf-8') as f:
     json.dump(news_data, f, ensure_ascii=False, indent=4)
 
-print("تم تحديث محرك الأخبار وقسم الأدوية بنجاح! 💊")
+print("تم تحديث الأخبار بنجاح!")
