@@ -1,1 +1,395 @@
+/* ==========================================
+   NewsOS V2
+   Design System
+========================================== */
 
+:root {
+
+    /* Colors */
+    --bg: #090909;
+    --surface: #131313;
+    --surface-2: #1a1a1a;
+
+    --border: rgba(255,255,255,.06);
+
+    --text: #ffffff;
+    --text-secondary: #a1a1aa;
+    --text-muted: #6f6f75;
+
+    --accent: #d4af37;
+    --accent-soft: rgba(212,175,55,.12);
+
+    --success: #29d17d;
+    --danger: #ff5b5b;
+
+    /* Radius */
+
+    --radius-small: 12px;
+    --radius: 18px;
+    --radius-large: 28px;
+
+    /* Shadow */
+
+    --shadow:
+
+        0 12px 30px rgba(0,0,0,.35);
+
+    /* Animation */
+
+    --transition: .25s ease;
+
+}
+
+
+/* ==========================================
+   Reset
+========================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #090909,
+
+            #111111
+
+        );
+
+    color:var(--text);
+
+    font-family:
+
+        "Segoe UI",
+
+        Tahoma,
+
+        sans-serif;
+
+    min-height:100vh;
+
+    -webkit-font-smoothing:antialiased;
+
+}
+
+
+/* ==========================================
+   Layout
+========================================== */
+
+.container{
+
+    width:min(100%,760px);
+
+    margin:auto;
+
+    padding:
+
+        22px
+
+        18px
+
+        80px;
+
+}
+
+
+/* ==========================================
+   Header
+========================================== */
+
+.header{
+
+    margin-bottom:28px;
+
+}
+
+.logo{
+
+    font-size:34px;
+
+    font-weight:800;
+
+    letter-spacing:.5px;
+
+}
+
+.logo span{
+
+    color:var(--accent);
+
+}
+
+.last-update{
+
+    margin-top:10px;
+
+    color:var(--text-secondary);
+
+    font-size:14px;
+
+}
+
+
+/* ==========================================
+   Search
+========================================== */
+
+.search-box{
+
+    width:100%;
+
+    margin:24px 0;
+
+    padding:18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:var(--radius);
+
+    background:var(--surface);
+
+    color:white;
+
+    font-size:17px;
+
+    transition:var(--transition);
+
+}
+
+.search-box:focus{
+
+    background:var(--surface-2);
+
+    box-shadow:
+
+        0 0 0 1px var(--accent);
+
+}
+
+
+/* ==========================================
+   Tabs
+========================================== */
+
+.tabs{
+
+    display:flex;
+
+    gap:10px;
+
+    overflow-x:auto;
+
+    padding-bottom:6px;
+
+    margin-bottom:28px;
+
+}
+
+.tabs::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+.tab{
+
+    border:none;
+
+    background:var(--surface);
+
+    color:var(--text-secondary);
+
+    padding:12px 18px;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+    transition:var(--transition);
+
+    font-size:15px;
+
+}
+
+.tab.active{
+
+    background:var(--accent);
+
+    color:#000;
+
+    font-weight:700;
+
+}
+
+
+/* ==========================================
+   Hero
+========================================== */
+
+.hero{
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #1c1c1c,
+
+            #151515
+
+        );
+
+    border:
+
+        1px solid var(--border);
+
+    border-radius:28px;
+
+    padding:24px;
+
+    margin-bottom:28px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.hero-label{
+
+    color:var(--accent);
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+}
+
+.hero-title{
+
+    font-size:28px;
+
+    line-height:1.5;
+
+    margin-bottom:14px;
+
+}
+
+.hero-summary{
+
+    color:var(--text-secondary);
+
+    line-height:1.8;
+
+}
+
+
+/* ==========================================
+   News Cards
+========================================== */
+
+.news-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.card{
+
+    background:var(--surface);
+
+    border:
+
+        1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:20px;
+
+    transition:var(--transition);
+
+}
+
+.card:active{
+
+    transform:scale(.98);
+
+}
+
+.card-title{
+
+    font-size:20px;
+
+    line-height:1.5;
+
+    margin-bottom:10px;
+
+}
+
+.card-summary{
+
+    color:var(--text-secondary);
+
+    line-height:1.8;
+
+    margin-bottom:18px;
+
+}
+
+.card-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    color:var(--text-muted);
+
+    font-size:13px;
+
+}
+
+
+/* ==========================================
+   Empty
+========================================== */
+
+.empty{
+
+    text-align:center;
+
+    color:var(--text-muted);
+
+    padding:70px 20px;
+
+}
