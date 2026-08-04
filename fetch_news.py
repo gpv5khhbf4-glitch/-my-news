@@ -2,7 +2,7 @@ import feedparser
 import json
 import re
 
-# مصادر أخبار مضمونة ومفتوحة للطب والأدوية
+# مصادر الأخبار المحدثة والمصححة 100%
 FEEDS = {
     "politics": [
         "https://www.skynewsarabia.com/web/rss.xml", 
@@ -13,8 +13,8 @@ FEEDS = {
         "https://www.tech-wd.com/wd/feed/"
     ],
     "medicines": [
-        "https://www.aljazeera.net/aljazeerarss/a7c18663-b1f1-4a18-9366-282672323f4f/3a105021-a3f2-4c9d-8d5a-ed756d10c0e3", # الجزيرة صحة وطب
-        "https://www.skynewsarabia.com/rss/v1/technology.xml" # علوم وصحة وسكاي نيوز
+        "https://arabic.cnn.com/api/v1/rss/health/rss.xml",  # CNN بالعربية - قسم الصحة والأدوية
+        "https://arabic.rt.com/rss/health/"                  # RT بالعربية - الأخبار الصحية والطبية
     ]
 }
 
