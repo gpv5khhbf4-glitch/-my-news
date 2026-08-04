@@ -28,7 +28,6 @@
             margin: 0 auto;
         }
 
-        /* القائمة العائمة الجديدة (الزجاج المضبب) */
         .tabs-container {
             display: flex;
             justify-content: space-around;
@@ -56,7 +55,6 @@
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* تأثير الضغطة */
         .tab-btn:active {
             transform: scale(0.90);
         }
@@ -67,7 +65,6 @@
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* صندوق البحث بتصميم جديد */
         .search-box {
             width: 100%;
             padding: 16px 20px;
@@ -88,7 +85,6 @@
             transform: translateY(-2px);
         }
 
-        /* تصميم بطاقة الخبر */
         .news-container {
             display: flex;
             flex-direction: column;
@@ -100,7 +96,7 @@
             padding: 20px;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.03);
-            opacity: 0; /* مخفي عشان حركة الدخول */
+            opacity: 0;
             transform: translateY(20px);
             animation: slideUp 0.5s forwards ease-out;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -110,7 +106,6 @@
             transform: scale(0.98);
         }
 
-        /* حركة الدخول للأخبار */
         @keyframes slideUp {
             to {
                 opacity: 1;
@@ -118,7 +113,6 @@
             }
         }
 
-        /* تاق وقت النشر (منفصل فوق) */
         .publish-time {
             display: inline-block;
             background: #2a2a2a;
@@ -129,7 +123,6 @@
             margin-bottom: 15px;
         }
 
-        /* عنوان الخبر مكبر */
         .news-title {
             margin: 0 0 15px 0;
             font-size: 22px;
@@ -146,7 +139,6 @@
             color: var(--gold-accent);
         }
 
-        /* تاق وقت القراءة (منفصل تحت) */
         .read-time {
             display: inline-flex;
             align-items: center;
@@ -157,23 +149,19 @@
             font-size: 14px;
             font-weight: bold;
         }
-
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- صندوق البحث -->
     <input type="text" id="searchInput" class="search-box" placeholder="🔍 ابحث في الأخبار..." onkeyup="filterNews()">
     
-    <!-- القائمة العائمة الجديدة -->
     <div class="tabs-container">
         <button class="tab-btn active" onclick="changeTab('politics', this)">السياسة</button>
         <button class="tab-btn" onclick="changeTab('tech', this)">التقنية</button>
-        <button class="tab-btn" onclick="changeTab('mobiles', this)">الجوالات</button>
+        <button class="tab-btn" onclick="changeTab('medicines', this)">💊 الأدوية</button>
     </div>
 
-    <!-- حاوية الأخبار -->
     <div class="news-container" id="newsContainer">
         <p style="text-align:center; color: var(--text-muted); font-size: 18px;">جاري تجهيز الأخبار...</p>
     </div>
@@ -195,16 +183,10 @@
 
     function changeTab(category, btnElement) {
         currentCategory = category;
-        
-        // تغيير الزر النشط
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
-        
-        // تصفير البحث
         document.getElementById('searchInput').value = '';
         renderNews();
-        
-        // ترجيع الشاشة فوق بلمسة ناعمة إذا كان المستخدم نازل تحت
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -232,8 +214,6 @@
         articles.forEach((article, index) => {
             const card = document.createElement('div');
             card.className = 'news-card';
-            
-            // إضافة تأخير زمني لكل بطاقة عشان تطلع بحركة متدرجة فخمة
             card.style.animationDelay = `${index * 0.1}s`;
             
             card.innerHTML = `
