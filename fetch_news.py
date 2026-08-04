@@ -2,7 +2,7 @@ import feedparser
 import json
 import re
 
-# مصادر الأخبار المحدثة والمصححة 100%
+# مصادر الأخبار المعتمدة
 FEEDS = {
     "politics": [
         "https://www.skynewsarabia.com/web/rss.xml", 
@@ -13,16 +13,23 @@ FEEDS = {
         "https://www.tech-wd.com/wd/feed/"
     ],
     "medicines": [
-        "https://arabic.cnn.com/api/v1/rss/health/rss.xml",  # CNN بالعربية - قسم الصحة والأدوية
-        "https://arabic.rt.com/rss/health/"                  # RT بالعربية - الأخبار الصحية والطبية
+        "https://arabic.cnn.com/api/v1/rss/health/rss.xml",
+        "https://arabic.rt.com/rss/health/"
     ]
 }
 
-def calculate_read_time(text):
+def evaluate_article_length(text):
+    # تنظيف النص وعد الكلمات بدقة
     clean_text = re.sub(r'<[^>]+>', '', text)
     word_count = len(clean_text.split())
-    read_time = max(1, round(word_count / 150))
-    return read_time
+    
+    # تقدير نوع وحجم المقال بناءً على عدد الكلمات
+    if word_count < 30:
+        return "⚡ قراءة سريعة"
+    elif word_count < 60:
+        return "⏱️ مقال متوسط"
+    else:
+        return "📖 مقال مفصل وشامل"
 
 news_data = {"politics": [], "tech": [], "medicines": []}
 
@@ -33,13 +40,14 @@ for category, urls in FEEDS.items():
             for entry in feed.entries[:12]:
                 summary = entry.get('summary', '')
                 title = entry.title.strip()
+                full_text = summary + " " + title
                 
                 news_data[category].append({
                     "title": title,
                     "link": entry.link,
                     "time": entry.get('published', 'اليوم'),
                     "summary": summary,
-                    "read_time": calculate_read_time(summary + " " + title)
+                    "read_label": evaluate_article_length(full_text)
                 })
         except Exception as e:
             print(f"خطأ في السحب: {e}")
@@ -47,4 +55,4 @@ for category, urls in FEEDS.items():
 with open('news.json', 'w', encoding='utf-8') as f:
     json.dump(news_data, f, ensure_ascii=False, indent=4)
 
-print("تم تحديث الأخبار بنجاح!")
+print("تم تقييم أحجام المقالات وتحديث الأخبار بنجاح! 🚀")
